@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+{% load crispy_forms_tags %}
+{% load static %}
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .background {
+            background-color: #042731;
+        }
+        .margin {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .margin_button {
+            margin-left: 30%;
+            margin-right: 30%;
+        }
+    </style>
+</head>
+<body class="background">
+    <div class="margin text-center">
+        {% block content %}
+        <a>
+            <img src="{% static 'images/logo/logo3.png' %}" class="img-fluid" alt="logo">
+        </a>
+        <div>
+           <form method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button class="btn btn-primary btn-block" type="submit">Search IlmnID</button>
+            </form>
+            <br>
+            {% if IlmnID %}
+            <table class="table table-dark tab1">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">IlmnID</th>
+                        <th scope="col">name</th>
+                        <th scope="col">symbol</th>
+                        <th scope="col">locus_type</th>
+                        <th scope="col">uniprot_ids</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td scope="col">{{IlmnID}}</td>
+                        <td scope="col">{{name}}</td>
+                        <td scope="col">{{symbol}}</td>
+                        <td scope="col">{{locus_type}}</td>
+                        <td scope="col">{{uniprot_ids}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-dark tab2">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">function</th>
+                        <th scope="col">subcellular_location</th>
+                        <th scope="col">tissue_specificity</th>
+                        <th scope="col">disease_summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td scope="col">{{function}}</td>
+                        <td scope="col">{{subcellular_location}}</td>
+                        <td scope="col">{{tissue_specificity}}</td>
+                        <td scope="col">{{disease_summary}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-dark tab3">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">cell_component</th>
+                        <th scope="col">molecular_function</th>
+                        <th scope="col">biological_process</th>
+                        <th scope="col">pathway</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td scope="col">{{cell_component}}</td>
+                        <td scope="col">{{molecular_function}}</td>
+                        <td scope="col">{{biological_process}}</td>
+                        <td scope="col">{{pathway}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-dark tab4">
+                <thead>
+                    <tr>
+                        <th scope="col">source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="col">{{source}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <form>
+            <button class="btn btn-primary btn-block" formaction={{url}}>Export data as CSV</button>
+        </form>
+        <br>
+        {% endif %}
+        {% endblock %}
+    </div>
+</body>
+</html>
